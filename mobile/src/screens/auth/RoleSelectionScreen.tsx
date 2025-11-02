@@ -31,20 +31,24 @@ const RoleSelectionScreen: React.FC = () => {
       return;
     }
 
-    // Note: In actual implementation, we would get email/password from navigation params
-    // or from a registration form state management solution
-    Alert.alert(
-      'Registration',
-      'Registration flow will be completed once Supabase is configured.\n\nFor now, please go back to login.',
-      [
-        {
-          text: 'OK',
-          onPress: () => navigation.navigate('Login'),
-        },
-      ]
-    );
+    if (selectedRole === 'worker') {
+      // Navigate to worker profile form
+      navigation.navigate('WorkerProfileForm');
+    } else {
+      // Employer profile form not yet implemented
+      Alert.alert(
+        'Coming Soon',
+        'Employer profile setup will be available in Phase 4.\n\nFor now, please go back to login.',
+        [
+          {
+            text: 'OK',
+            onPress: () => navigation.navigate('Login'),
+          },
+        ]
+      );
+    }
 
-    // Future implementation:
+    // Future implementation with Supabase registration:
     // setLoadingState(true);
     // dispatch(setLoading(true));
     //

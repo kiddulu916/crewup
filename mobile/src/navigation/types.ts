@@ -6,6 +6,7 @@ export type AuthStackParamList = {
   Login: undefined;
   Register: undefined;
   RoleSelection: undefined;
+  WorkerProfileForm: undefined;
 };
 
 // Main App Stack Parameter List
