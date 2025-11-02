@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,18 +13,19 @@ import { AuthStackParamList } from '../../navigation/types';
 import { Button, Input, Card, ProfilePhotoUpload, Picker } from '../../components';
 import { Colors } from '../../theme/colors';
 import { Typography } from '../../theme/typography';
-import { Spacing } from '../../theme/spacing';
+import { Spacing, BorderRadius } from '../../theme/spacing';
 import { WorkerProfileService } from '../../services/workerProfileService';
-import { WorkerProfileFormData } from '../../types/profile';
+import { WorkerProfileFormData, Location } from '../../types/profile';
 import { TRADE_OPTIONS, EXPERIENCE_LEVELS } from '../../utils/skills';
 import { useAppSelector } from '../../store/hooks';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'WorkerProfileForm'>;
 
-export const WorkerProfileFormScreen: React.FC<Props> = ({ navigation }) => {
+export const WorkerProfileFormScreen: React.FC<Props> = ({ navigation, route }) => {
   const user = useAppSelector(state => state.auth.user);
   const [isLoading, setIsLoading] = useState(false);
   const [photoUri, setPhotoUri] = useState<string | undefined>();
+  const [selectedLocation, setSelectedLocation] = useState<Location | undefined>();
 
   const [formData, setFormData] = useState<WorkerProfileFormData>({
     first_name: '',
@@ -43,6 +44,13 @@ export const WorkerProfileFormScreen: React.FC<Props> = ({ navigation }) => {
   });
 
   const [errors, setErrors] = useState<Partial<Record<keyof WorkerProfileFormData, string>>>({});
+
+  // Handle location selection from LocationPicker screen
+  useEffect(() => {
+    if (route.params?.selectedLocation) {
+      setSelectedLocation(route.params.selectedLocation);
+    }
+  }, [route.params?.selectedLocation]);
 
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof WorkerProfileFormData, string>> = {};
@@ -126,6 +134,18 @@ export const WorkerProfileFormScreen: React.FC<Props> = ({ navigation }) => {
 
       if (error) {
         throw new Error(error);
+      }
+
+      // Update location if selected
+      if (selectedLocation && data?.id) {
+        const { error: locationError } = await WorkerProfileService.updateLocation(
+          data.id,
+          selectedLocation
+        );
+        if (locationError) {
+          console.warn('Failed to update location:', locationError);
+          // Don't throw error, just log it - profile was created successfully
+        }
       }
 
       Alert.alert('Success', 'Your profile has been created!', [
@@ -265,6 +285,23 @@ export const WorkerProfileFormScreen: React.FC<Props> = ({ navigation }) => {
             onValueChange={value => updateFormData('work_radius_miles', value)}
           />
 
+          <View style={styles.locationSection}>
+            <Text style={styles.sectionTitle}>Work Location (Optional)</Text>
+            <Button
+              title={selectedLocation ? 'Change Location' : 'Set Preferred Location'}
+              onPress={() => navigation.navigate('LocationPicker', { initialLocation: selectedLocation })}
+              variant="outline"
+              fullWidth
+            />
+            {selectedLocation && (
+              <View style={styles.locationInfo}>
+                <Text style={styles.locationInfoText}>
+                  📍 Location: {selectedLocation.latitude.toFixed(4)}, {selectedLocation.longitude.toFixed(4)}
+                </Text>
+              </View>
+            )}
+          </View>
+
           <Button
             title="Create Profile"
             onPress={handleSubmit}
@@ -323,6 +360,19 @@ const styles = StyleSheet.create({
   },
   rateInput: {
     flex: 1,
+  },
+  locationSection: {
+    marginTop: Spacing.md,
+  },
+  locationInfo: {
+    marginTop: Spacing.sm,
+    padding: Spacing.sm,
+    backgroundColor: Colors.backgroundDark,
+    borderRadius: BorderRadius.sm,
+  },
+  locationInfoText: {
+    ...Typography.body,
+    color: Colors.text,
   },
   submitButton: {
     marginTop: Spacing.lg,
