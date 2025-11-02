@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+:root {
+  /* Primary Colors */
+  --primary: #FF6B35;
+  --primary-dark: #E85A28;
+  --primary-light: #FF8557;
+
+  /* Secondary Colors */
+  --secondary: #2C3E50;
+  --secondary-dark: #1A252F;
+  --secondary-light: #34495E;
+
+  /* Accent Colors */
+  --accent: #FFC107;
+  --accent-dark: #FFA000;
+  --accent-light: #FFD54F;
+
+  /* Status Colors */
+  --success: #27AE60;
+  --success-light: #2ECC71;
+  --error: #E74C3C;
+  --error-light: #EC7063;
+  --warning: #F39C12;
+  --warning-light: #F8C471;
+  --info: #3498DB;
+  --info-light: #5DADE2;
+
+  /* Neutral Colors */
+  --background: #F5F5F5;
+  --background-dark: #EEEEEE;
+  --surface: #FFFFFF;
+
+  /* Text Colors */
+  --text: #2C3E50;
+  --text-secondary: #7F8C8D;
+  --text-light: #95A5A6;
+  --text-inverse: #FFFFFF;
+
+  /* Border Colors */
+  --border: #E0E0E0;
+  --border-light: #F0F0F0;
+  --border-dark: #BDBDBD;
+
+  /* Premium */
+  --premium: #FFD700;
+  --premium-dark: #FFC107;
+
+  /* Urgent */
+  --urgent: #E74C3C;
+}
+
+@theme inline {
+  /* Primary */
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+
+  /* Secondary */
+  --color-secondary: var(--secondary);
+  --color-secondary-dark: var(--secondary-dark);
+  --color-secondary-light: var(--secondary-light);
+
+  /* Accent */
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-light: var(--accent-light);
+
+  /* Status */
+  --color-success: var(--success);
+  --color-success-light: var(--success-light);
+  --color-error: var(--error);
+  --color-error-light: var(--error-light);
+  --color-warning: var(--warning);
+  --color-warning-light: var(--warning-light);
+  --color-info: var(--info);
+  --color-info-light: var(--info-light);
+
+  /* Neutral */
+  --color-background: var(--background);
+  --color-background-dark: var(--background-dark);
+  --color-surface: var(--surface);
+
+  /* Text */
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-light: var(--text-light);
+  --color-text-inverse: var(--text-inverse);
+
+  /* Border */
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+  --color-border-dark: var(--border-dark);
+
+  /* Premium */
+  --color-premium: var(--premium);
+  --color-premium-dark: var(--premium-dark);
+
+  /* Urgent */
+  --color-urgent: var(--urgent);
+
+  /* Fonts */
+  --font-heading: 'Roboto', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
