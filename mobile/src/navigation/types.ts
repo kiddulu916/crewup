@@ -8,6 +8,8 @@ export type AuthStackParamList = {
   RoleSelection: undefined;
   WorkerProfileForm: { selectedLocation?: { latitude: number; longitude: number } } | undefined;
   LocationPicker: { initialLocation?: { latitude: number; longitude: number } } | undefined;
+  WorkHistoryForm: { workerId: string };
+  CertificationForm: { workerId: string };
 };
 
 // Main App Stack Parameter List

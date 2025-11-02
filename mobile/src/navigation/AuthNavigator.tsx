@@ -6,7 +6,12 @@ import { AuthStackParamList } from './types';
 import LoginScreen from '../screens/auth/LoginScreen';
 import RegisterScreen from '../screens/auth/RegisterScreen';
 import RoleSelectionScreen from '../screens/auth/RoleSelectionScreen';
-import { WorkerProfileFormScreen, LocationPickerScreen } from '../screens/worker';
+import {
+  WorkerProfileFormScreen,
+  LocationPickerScreen,
+  WorkHistoryFormScreen,
+  CertificationFormScreen,
+} from '../screens/worker';
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
@@ -26,6 +31,16 @@ export const AuthNavigator: React.FC = () => {
         name="LocationPicker"
         component={LocationPickerScreen}
         options={{ title: 'Select Location' }}
+      />
+      <Stack.Screen
+        name="WorkHistoryForm"
+        component={WorkHistoryFormScreen}
+        options={{ title: 'Add Work History' }}
+      />
+      <Stack.Screen
+        name="CertificationForm"
+        component={CertificationFormScreen}
+        options={{ title: 'Add Certification' }}
       />
     </Stack.Navigator>
   );
