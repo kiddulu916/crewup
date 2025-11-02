@@ -177,7 +177,7 @@ export const WorkHistoryFormScreen: React.FC<Props> = ({ navigation, route }) =>
             value={formData.description}
             onChangeText={text => updateFormData('description', text)}
             placeholder="Describe your responsibilities and achievements..."
-            multiline
+            multiline={true}
             numberOfLines={4}
             style={styles.descriptionInput}
           />

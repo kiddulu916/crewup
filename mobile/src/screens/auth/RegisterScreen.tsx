@@ -114,7 +114,7 @@ const RegisterScreen: React.FC = () => {
               title="Continue"
               onPress={handleRegister}
               loading={loading}
-              fullWidth
+              fullWidth={true}
               variant="primary"
             />
           </View>

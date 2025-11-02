@@ -244,7 +244,7 @@ export const WorkerProfileFormScreen: React.FC<Props> = ({ navigation, route }) 
             value={formData.bio}
             onChangeText={text => updateFormData('bio', text)}
             placeholder="Tell employers about your experience and skills..."
-            multiline
+            multiline={true}
             numberOfLines={4}
             style={styles.bioInput}
           />
@@ -291,7 +291,7 @@ export const WorkerProfileFormScreen: React.FC<Props> = ({ navigation, route }) 
               title={selectedLocation ? 'Change Location' : 'Set Preferred Location'}
               onPress={() => navigation.navigate('LocationPicker', { initialLocation: selectedLocation })}
               variant="outline"
-              fullWidth
+              fullWidth={true}
             />
             {selectedLocation && (
               <View style={styles.locationInfo}>
@@ -308,7 +308,7 @@ export const WorkerProfileFormScreen: React.FC<Props> = ({ navigation, route }) 
             loading={isLoading}
             variant="primary"
             size="large"
-            fullWidth
+            fullWidth={true}
             style={styles.submitButton}
           />
         </Card>

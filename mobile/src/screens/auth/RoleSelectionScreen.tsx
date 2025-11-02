@@ -147,7 +147,7 @@ const RoleSelectionScreen: React.FC = () => {
           title="Continue"
           onPress={handleContinue}
           loading={loading}
-          fullWidth
+          fullWidth={true}
           variant="primary"
           disabled={!selectedRole}
         />

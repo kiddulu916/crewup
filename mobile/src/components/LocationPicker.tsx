@@ -167,7 +167,7 @@ export const LocationPicker: React.FC<LocationPickerProps> = ({
         title="Confirm Location"
         onPress={handleConfirmLocation}
         variant="primary"
-        fullWidth
+        fullWidth={true}
         disabled={!location}
         style={styles.confirmButton}
       />

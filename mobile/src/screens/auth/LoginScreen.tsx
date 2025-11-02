@@ -127,7 +127,7 @@ const LoginScreen: React.FC = () => {
               title="Sign In"
               onPress={handleLogin}
               loading={loading}
-              fullWidth
+              fullWidth={true}
               variant="primary"
             />
           </View>
