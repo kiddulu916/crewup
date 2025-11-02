@@ -94,6 +94,38 @@ export interface EmployerProfile {
   updated_at?: Date;
 }
 
+// Job Posting types
+export type JobType = 'standard' | 'day_labor';
+export type JobStatus = 'draft' | 'active' | 'filled' | 'closed' | 'expired';
+export type PayType = 'hourly' | 'salary' | 'per_project';
+
+export interface JobPosting {
+  id?: string;
+  employer_id: string;
+  job_type: JobType;
+  title: string;
+  description: string;
+  required_trade?: string;
+  required_skills?: string[];
+  pay_type: PayType;
+  pay_rate_min?: number;
+  pay_rate_max?: number;
+  pay_amount?: number;
+  job_location?: Location;
+  location_address?: string;
+  start_date?: Date;
+  duration_weeks?: number;
+  required_certifications?: string[];
+  experience_required?: ExperienceLevel;
+  workers_needed: number;
+  status: JobStatus;
+  applications_count: number;
+  views_count: number;
+  created_at?: Date;
+  updated_at?: Date;
+  expires_at?: Date;
+}
+
 // Form state types
 export interface WorkerProfileFormData {
   first_name: string;
@@ -109,4 +141,35 @@ export interface WorkerProfileFormData {
   has_own_tools: boolean;
   has_transportation: boolean;
   work_radius_miles: string;
+}
+
+export interface EmployerProfileFormData {
+  company_name: string;
+  company_logo_url?: string;
+  business_type?: string;
+  company_size?: string;
+  description?: string;
+  website?: string;
+  service_radius_miles: string;
+  license_number?: string;
+  phone?: string;
+  email?: string;
+}
+
+export interface JobPostingFormData {
+  job_type: JobType;
+  title: string;
+  description: string;
+  required_trade?: string;
+  required_skills?: string[];
+  pay_type: PayType;
+  pay_rate_min?: string;
+  pay_rate_max?: string;
+  pay_amount?: string;
+  location_address?: string;
+  start_date?: string;
+  duration_weeks?: string;
+  required_certifications?: string[];
+  experience_required?: ExperienceLevel;
+  workers_needed: string;
 }

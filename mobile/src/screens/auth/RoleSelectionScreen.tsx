@@ -35,17 +35,8 @@ const RoleSelectionScreen: React.FC = () => {
       // Navigate to worker profile form
       navigation.navigate('WorkerProfileForm');
     } else {
-      // Employer profile form not yet implemented
-      Alert.alert(
-        'Coming Soon',
-        'Employer profile setup will be available in Phase 4.\n\nFor now, please go back to login.',
-        [
-          {
-            text: 'OK',
-            onPress: () => navigation.navigate('Login'),
-          },
-        ]
-      );
+      // Navigate to employer profile form
+      navigation.navigate('EmployerProfileForm');
     }
 
     // Future implementation with Supabase registration:
