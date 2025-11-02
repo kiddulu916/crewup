@@ -71,7 +71,7 @@ export const Picker: React.FC<PickerProps> = ({
 
       <Modal
         visible={isVisible}
-        transparent
+        transparent={true}
         animationType="fade"
         onRequestClose={() => setIsVisible(false)}
       >
