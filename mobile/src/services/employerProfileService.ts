@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabase';
+import { supabase } from '../utils/supabase';
 import { EmployerProfile, EmployerProfileFormData, Location } from '../types/profile';
 import * as FileSystem from 'expo-file-system';
 

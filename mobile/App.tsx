@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList } from 'react-native';
+import { supabase } from './src/utils/supabase';
 import { StatusBar } from 'expo-status-bar';
 import { Provider } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -57,6 +59,29 @@ function AppContent() {
 }
 
 export default function App() {
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const getTodos = async () => {
+      try {
+        const { data: todos, error } = await supabase.from('todos').select();
+
+        if (error) {
+          console.error('Error fetching todos:', error.message);
+          return;
+        }
+
+        if (todos && todos.length > 0) {
+          setTodos(todos);
+        }
+      } catch (error) {
+        console.error('Error fetching todos:', error.message);
+      }
+    };
+
+    getTodos();
+  }, []);
+  
   return (
     <Provider store={store}>
       <SafeAreaProvider>

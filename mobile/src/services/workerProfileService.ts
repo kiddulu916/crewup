@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabase';
+import { supabase } from '../utils/supabase';
 import { WorkerProfile, WorkerProfileFormData, Location } from '../types/profile';
 import * as FileSystem from 'expo-file-system';
 
@@ -153,12 +153,13 @@ export class WorkerProfileService {
     }
   }
 
-  /**
-   * Add skills to profile
-   */
-  static async addSkills(workerId: string, skills: Array<{ skill_id: string; proficiency_level: string }>) {
+   /** Add skills to profile **/
+  static async addSkills(
+    workerId: string, 
+    skills: Array<{ skill_id: string; proficiency_level: string }>
+  ) {
     try {
-      const skillRecords = skills.map(skill => ({
+      const skillRecords = skills.map((skill) => ({
         worker_id: workerId,
         ...skill,
       }));
