@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabase';
+import { supabase } from '../utils/supabase';
 import { JobPosting, JobPostingFormData, Location } from '../types/profile';
 
 export class JobPostingService {
