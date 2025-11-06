@@ -3,22 +3,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MainStackParamList, MainTabsParamList } from './types';
 import { Colors } from '../theme/colors';
-
-// Placeholder screens for now (will be built in later phases)
 import { View, Text, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const HomeScreen = () => (
-  <View style={styles.placeholder}>
-    <Text style={styles.placeholderText}>Home Screen</Text>
-  </View>
-);
+// Worker screens
+import { HomeScreen, JobDetailScreen, ApplicationsScreen } from '../screens/worker';
 
-const SearchScreen = () => (
-  <View style={styles.placeholder}>
-    <Text style={styles.placeholderText}>Search Screen</Text>
-  </View>
-);
-
+// Placeholder screens for later phases
 const MessagesScreen = () => (
   <View style={styles.placeholder}>
     <Text style={styles.placeholderText}>Messages Screen</Text>
@@ -38,7 +29,7 @@ const MainTabs: React.FC = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
         tabBarActiveTintColor: Colors.primary,
         tabBarInactiveTintColor: Colors.textSecondary,
         tabBarStyle: {
@@ -50,10 +41,44 @@ const MainTabs: React.FC = () => {
         },
       }}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Search" component={SearchScreen} />
-      <Tab.Screen name="Messages" component={MessagesScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          title: 'Jobs',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="briefcase" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Applications"
+        component={ApplicationsScreen}
+        options={{
+          title: 'My Applications',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="file-document" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Messages"
+        component={MessagesScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="message" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="account" size={size} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
@@ -62,10 +87,19 @@ export const MainNavigator: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
       }}
     >
-      <Stack.Screen name="MainTabs" component={MainTabs} />
+      <Stack.Screen
+        name="MainTabs"
+        component={MainTabs}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="JobDetail"
+        component={JobDetailScreen}
+        options={{ title: 'Job Details' }}
+      />
     </Stack.Navigator>
   );
 };

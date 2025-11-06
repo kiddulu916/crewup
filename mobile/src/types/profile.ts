@@ -173,3 +173,26 @@ export interface JobPostingFormData {
   experience_required?: ExperienceLevel;
   workers_needed: string;
 }
+
+// Application types (matches existing database schema)
+export type ApplicationStatus = 'pending' | 'viewed' | 'shortlisted' | 'accepted' | 'rejected' | 'withdrawn';
+
+export interface Application {
+  id: string;
+  job_id: string;
+  worker_id: string;
+  status: ApplicationStatus;
+  cover_letter: string | null; // Matches DB column name
+  is_priority: boolean;
+  applied_at: string; // Matches DB column name
+  viewed_at: string | null;
+  status_updated_at: string | null;
+  // Joined data
+  job?: JobPosting;
+  worker?: WorkerProfile;
+}
+
+export interface ApplicationWithDetails extends Application {
+  job: JobPosting;
+  worker: WorkerProfile;
+}

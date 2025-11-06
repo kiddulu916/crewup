@@ -15,6 +15,8 @@ import {
 import {
   EmployerProfileFormScreen,
   JobPostingFormScreen,
+  JobManagementDashboard,
+  ApplicantsScreen,
 } from '../screens/employer';
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
@@ -38,6 +40,11 @@ export const AuthNavigator: React.FC = () => {
         options={{ title: 'Post a Job' }}
       />
       <Stack.Screen
+        name="JobManagement"
+        component={JobManagementDashboard}
+        options={{ title: 'Manage Jobs' }}
+      />
+      <Stack.Screen
         name="LocationPicker"
         component={LocationPickerScreen}
         options={{ title: 'Select Location' }}
@@ -51,6 +58,11 @@ export const AuthNavigator: React.FC = () => {
         name="CertificationForm"
         component={CertificationFormScreen}
         options={{ title: 'Add Certification' }}
+      />
+      <Stack.Screen
+        name="Applicants"
+        component={ApplicantsScreen}
+        options={{ title: 'Applicants' }}
       />
     </Stack.Navigator>
   );

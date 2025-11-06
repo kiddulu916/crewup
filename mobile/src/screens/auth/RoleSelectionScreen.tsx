@@ -18,51 +18,58 @@ type RoleSelectionNavigationProp = NativeStackNavigationProp<
 
 const RoleSelectionScreen: React.FC = () => {
   const navigation = useNavigation<RoleSelectionNavigationProp>();
+  const route = useRoute<any>();
   const dispatch = useAppDispatch();
 
   const [selectedRole, setSelectedRole] = useState<'worker' | 'employer' | null>(null);
   const [loading, setLoadingState] = useState(false);
 
-  // In a real app, email and password would be passed from RegisterScreen
-  // For now, we'll need to modify the navigation to pass these params
   const handleContinue = async () => {
     if (!selectedRole) {
       Alert.alert('Select a Role', 'Please choose whether you are a Worker or Employer');
       return;
     }
 
-    if (selectedRole === 'worker') {
-      // Navigate to worker profile form
-      navigation.navigate('WorkerProfileForm');
-    } else {
-      // Navigate to employer profile form
-      navigation.navigate('EmployerProfileForm');
-    }
+    setLoadingState(true);
+    dispatch(setLoading(true));
 
-    // Future implementation with Supabase registration:
-    // setLoadingState(true);
-    // dispatch(setLoading(true));
-    //
-    // const { data, error } = await AuthService.signUp({
-    //   email: route.params.email,
-    //   password: route.params.password,
-    //   userType: selectedRole,
-    // });
-    //
-    // if (error) {
-    //   Alert.alert('Registration Failed', error);
-    //   setLoadingState(false);
-    //   dispatch(setLoading(false));
-    //   return;
-    // }
-    //
-    // if (data?.session) {
-    //   const { user, error: userError } = await AuthService.getCurrentUser();
-    //   if (user) {
-    //     dispatch(setSession(data.session));
-    //     dispatch(setUser(user));
-    //   }
-    // }
+    try {
+      // Register user with Supabase
+      const { data, error } = await AuthService.signUp({
+        email: route.params.email,
+        password: route.params.password,
+        userType: selectedRole,
+      });
+
+      if (error) {
+        Alert.alert('Registration Failed', error);
+        setLoadingState(false);
+        dispatch(setLoading(false));
+        return;
+      }
+
+      if (data?.session) {
+        const { user, error: userError } = await AuthService.getCurrentUser();
+        if (user) {
+          dispatch(setSession(data.session));
+          dispatch(setUser(user));
+
+          // Navigate to appropriate profile form
+          if (selectedRole === 'worker') {
+            navigation.navigate('WorkerProfileForm');
+          } else {
+            navigation.navigate('EmployerProfileForm');
+          }
+        } else if (userError) {
+          Alert.alert('Error', userError);
+        }
+      }
+    } catch (error: any) {
+      Alert.alert('Error', error.message || 'Failed to create account');
+    } finally {
+      setLoadingState(false);
+      dispatch(setLoading(false));
+    }
   };
 
   return (

@@ -46,8 +46,8 @@ const RegisterScreen: React.FC = () => {
 
     setErrors({});
 
-    // Navigate to role selection
-    navigation.navigate('RoleSelection');
+    // Navigate to role selection with credentials
+    navigation.navigate('RoleSelection', { email, password });
   };
 
   return (

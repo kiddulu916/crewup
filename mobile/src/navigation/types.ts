@@ -5,10 +5,12 @@ import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 export type AuthStackParamList = {
   Login: undefined;
   Register: undefined;
-  RoleSelection: undefined;
+  RoleSelection: { email: string; password: string };
   WorkerProfileForm: { selectedLocation?: { latitude: number; longitude: number } } | undefined;
   EmployerProfileForm: { selectedLocation?: { latitude: number; longitude: number } } | undefined;
   JobPostingForm: { employerId: string; selectedLocation?: { latitude: number; longitude: number } } | undefined;
+  JobManagement: { employerId: string };
+  Applicants: { jobId: string };
   LocationPicker: { initialLocation?: { latitude: number; longitude: number } } | undefined;
   WorkHistoryForm: { workerId: string };
   CertificationForm: { workerId: string };
@@ -17,13 +19,15 @@ export type AuthStackParamList = {
 // Main App Stack Parameter List
 export type MainStackParamList = {
   MainTabs: undefined;
+  JobDetail: { jobId: string };
+  Applicants: { jobId: string };
   // Other screens will be added in later phases
 };
 
 // Bottom Tabs Parameter List
 export type MainTabsParamList = {
   Home: undefined;
-  Search: undefined;
+  Applications: undefined;
   Messages: undefined;
   Profile: undefined;
 };

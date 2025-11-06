@@ -198,6 +198,25 @@ export class JobPostingService {
   }
 
   /**
+   * Get all active jobs
+   */
+  static async getActiveJobs() {
+    try {
+      const { data, error } = await supabase
+        .from('job_postings')
+        .select('*')
+        .eq('status', 'active')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      return { data: data as JobPosting[], error: null };
+    } catch (error: any) {
+      return { data: null, error: error.message };
+    }
+  }
+
+  /**
    * Search jobs (will use Meilisearch in future)
    */
   static async searchJobs(query: string, filters?: {

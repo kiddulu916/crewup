@@ -28,6 +28,7 @@ export const Input: React.FC<InputProps> = ({
   rightIcon,
   onRightIconPress,
   style,
+  multiline,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -44,6 +45,8 @@ export const Input: React.FC<InputProps> = ({
       <View
         style={[
           styles.inputContainer,
+          multiline && styles.inputContainerMultiline,
+          multiline && style,
           {
             borderColor: getBorderColor(),
             borderWidth: isFocused ? 2 : 1,
@@ -53,7 +56,8 @@ export const Input: React.FC<InputProps> = ({
         {leftIcon && <View style={styles.leftIconContainer}>{leftIcon}</View>}
         <TextInput
           {...props}
-          style={[styles.input, style]}
+          multiline={multiline}
+          style={[styles.input, multiline && styles.inputMultiline, !multiline && style]}
           placeholderTextColor={Colors.textLight}
           onFocus={e => {
             setIsFocused(true);
@@ -97,11 +101,21 @@ const styles = StyleSheet.create({
     height: Layout.inputHeight,
     paddingHorizontal: Spacing.md,
   },
+  inputContainerMultiline: {
+    height: undefined,
+    minHeight: Layout.inputHeight,
+    alignItems: 'flex-start',
+    paddingVertical: Spacing.sm,
+  },
   input: {
     flex: 1,
     fontSize: FontSize.input,
     color: Colors.text,
     paddingVertical: 0, // Remove default padding
+  },
+  inputMultiline: {
+    paddingVertical: Spacing.xs,
+    textAlignVertical: 'top',
   },
   leftIconContainer: {
     marginRight: Spacing.sm,
