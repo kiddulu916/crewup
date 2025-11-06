@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MainStackParamList, MainTabsParamList } from './types';
 import { Colors } from '../theme/colors';
 import { View, Text, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 // Worker screens
 import { HomeScreen, JobDetailScreen, ApplicationsScreen } from '../screens/worker';
@@ -47,7 +47,7 @@ const MainTabs: React.FC = () => {
         options={{
           title: 'Jobs',
           tabBarIcon: ({ color, size }) => (
-            <Icon name="briefcase" size={size} color={color} />
+            <MaterialCommunityIcons name="briefcase" size={size} color={color} />
           ),
         }}
       />
@@ -57,7 +57,7 @@ const MainTabs: React.FC = () => {
         options={{
           title: 'My Applications',
           tabBarIcon: ({ color, size }) => (
-            <Icon name="file-document" size={size} color={color} />
+            <MaterialCommunityIcons name="file-document" size={size} color={color} />
           ),
         }}
       />
@@ -66,7 +66,7 @@ const MainTabs: React.FC = () => {
         component={MessagesScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Icon name="message" size={size} color={color} />
+            <MaterialCommunityIcons name="message" size={size} color={color} />
           ),
         }}
       />
@@ -75,7 +75,7 @@ const MainTabs: React.FC = () => {
         component={ProfileScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Icon name="account" size={size} color={color} />
+            <MaterialCommunityIcons name="account" size={size} color={color} />
           ),
         }}
       />
