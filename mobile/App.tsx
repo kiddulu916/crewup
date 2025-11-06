@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
-import { supabase } from './src/utils/supabase';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Provider } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { PaperProvider } from 'react-native-paper';
 import { store } from './src/store';
 import { RootNavigator } from './src/navigation';
 import { AuthService } from './src/services/authService';
@@ -61,9 +60,11 @@ function AppContent() {
 export default function App() {
   return (
     <Provider store={store}>
-      <SafeAreaProvider>
-        <AppContent />
-      </SafeAreaProvider>
+      <PaperProvider>
+        <SafeAreaProvider>
+          <AppContent />
+        </SafeAreaProvider>
+      </PaperProvider>
     </Provider>
   );
 }
